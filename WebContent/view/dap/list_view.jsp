@@ -1,9 +1,8 @@
 <%@ page contentType = "text/html; charset=euc-kr" %>
 <%@ page import = "java.util.List" %>
 <%@ page import = "java.util.Map" %>
-<%@ page import = "madvirus.gallery.Theme" %>
-<%@ page import = "madvirus.gallery.ThemeManager" %>
-<%@ page import = "madvirus.gallery.ThemeManagerException" %>
+<%@ page import = "bean.ThemeBean" %>
+<%@ page import = "dao.ThemeDaoImpl" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%!
@@ -39,9 +38,9 @@
         }
     }
     
-    ThemeManager manager = ThemeManager.getInstance();
+    ThemeDaoImpl manager = ThemeDaoImpl.getInstance();
     
-    int count = manager.count(whereCond, whereValue);
+    int count = manager.count();
     int totalPageCount = 0; // 전체 페이지 개수를 저장한다.
     int startRow = 0, endRow = 0; // 시작 행과 끝 행의 개수를 구한다.
     if (count > 0) {
@@ -53,8 +52,7 @@
         if (endRow > count) endRow = count;
     }
     
-    List list = manager.selectList(whereCond, whereValue, 
-        startRow-1, endRow-1);
+    List list = manager.list();
 %>
 <c:set var="list" value="<%= list %>" />
 <c:if test="<%= searchCondTitle || searchCondName %>">
@@ -165,5 +163,5 @@ function goView(id) {
     <input type="text" name="search_key" value="" size="10">
     <input type="submit" value="검색">
     <input type="button" value="전체목록" 
-           onClick="location.href='list.jsp?page=1'";
+           onClick="location.href='list.jsp?page=1'">
 </form>

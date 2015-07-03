@@ -5,25 +5,24 @@
 <%@ page import = "java.io.File" %>
 <%@ page import = "org.apache.commons.fileupload.FileItem" %>
 
-<%@ page import = "madvirus.util.ImageUtil" %>
-<%@ page import = "madvirus.fileupload.FileUploadRequestWrapper" %>
+<%@ page import = "util.ImageUtil" %>
+<%@ page import = "util.FileUploadUtil" %>
 
-<%@ page import = "madvirus.gallery.Theme" %>
-<%@ page import = "madvirus.gallery.ThemeManager" %>
-<%@ page import = "madvirus.gallery.ThemeManagerException" %>
+<%@ page import = "bean.ThemeBean" %>
+<%@ page import = "dao.ThemeDaoImpl" %>
 
 <%
-    FileUploadRequestWrapper requestWrap = new FileUploadRequestWrapper(
+   /*  FileUploadRequestWrapper requestWrap = new FileUploadRequestWrapper(
         request, -1, -1,
         "C:\\jakarta-tomcat-5.0.19\\webapps\\chap18\\temp");
     HttpServletRequest tempRequest = request;
-    request = requestWrap;
+    request = requestWrap; */
 %>
-<jsp:useBean id="theme" class="madvirus.gallery.Theme">
+<jsp:useBean id="theme" class="bean.ThemeBean">
     <jsp:setProperty name="theme" property="*" />
 </jsp:useBean>
 <%
-    FileItem imageFileItem = requestWrap.getFileItem("imageFile");
+    /* FileItem imageFileItem = requestWrap.getFileItem("imageFile");
     String image = "";
     if (imageFileItem.getSize() > 0) {
         int idx = imageFileItem.getName().lastIndexOf("\\");
@@ -58,9 +57,9 @@
     }
     
     theme.setRegister(new Timestamp(System.currentTimeMillis()));
-    theme.setImage(image);
+    theme.setImage(image); */
     
-    ThemeManager manager = ThemeManager.getInstance();
+    ThemeDaoImpl manager = ThemeDaoImpl.getInstance();
     manager.insert(theme);
 %>
 <script>

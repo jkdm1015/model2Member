@@ -1,9 +1,8 @@
 <%@ page contentType = "text/html; charset=euc-kr" %>
 <%@ page errorPage = "/error/error_view.jsp" %>
 
-<%@ page import = "madvirus.gallery.Theme" %>
-<%@ page import = "madvirus.gallery.ThemeManager" %>
-<%@ page import = "madvirus.gallery.ThemeManagerException" %>
+<%@ page import = "bean.ThemeBean" %>
+<%@ page import = "dao.ThemeDaoImpl" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -12,10 +11,10 @@
 <body>
 <%
     String themeId = request.getParameter("id");
-    ThemeManager manager = ThemeManager.getInstance();
-    Theme oldTheme = manager.select(Integer.parseInt(themeId));
+	ThemeDaoImpl manager = ThemeDaoImpl.getInstance();
+    ThemeBean oldTheme = (ThemeBean)manager.getElementById(themeId);
 %>
-<c:set var="oldTheme" value="<%= oldTheme %>" />
+<c:set var="oldTheme" value="<%=oldTheme %>" />
 <c:choose>
     <c:when test="${empty oldTheme}">
     <script>
@@ -33,7 +32,7 @@
 
     <c:when test="${oldTheme.password == param.password}">
     <%
-        manager.delete(oldTheme.getId());
+       /*  manager.delete(oldTheme.getId()); */
     %>
     <script>
     alert("글을 삭제하였습니다.");

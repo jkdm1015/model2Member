@@ -13,7 +13,7 @@ A:hover { color: blue; font-weight: bold; text-decoration: underline}
 <table width="100%" border="1" cellpadding="2" cellspacing="0">
 <tr>
     <td>
-        <jsp:include page="/module/top.jsp" flush="false" />
+        <jsp:include page="top.jsp" flush="false" />
     </td>
 </tr>
 <tr>
@@ -25,7 +25,7 @@ A:hover { color: blue; font-weight: bold; text-decoration: underline}
 </tr>
 <tr>
     <td>
-        <jsp:include page="/module/bottom.jsp" flush="false" />
+        <jsp:include page="bottom.jsp" flush="false" />
     </td>
 </tr>
 </table>

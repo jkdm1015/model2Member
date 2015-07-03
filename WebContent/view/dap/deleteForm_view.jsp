@@ -1,14 +1,13 @@
 <%@ page contentType = "text/html; charset=euc-kr" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import = "madvirus.gallery.Theme" %>
-<%@ page import = "madvirus.gallery.ThemeManager" %>
-<%@ page import = "madvirus.gallery.ThemeManagerException" %>
+<%@ page import = "bean.ThemeBean" %>
+<%@ page import = "dao.ThemeDaoImpl" %>
 <%
-    String themeId = request.getParameter("id");
-    ThemeManager manager = ThemeManager.getInstance();
-    Theme theme = manager.select(Integer.parseInt(themeId));
+	String themeId = request.getParameter("id");
+	ThemeDaoImpl manager = ThemeDaoImpl.getInstance();
+	ThemeBean oldTheme = (ThemeBean)manager.getElementById(themeId);
 %>
-<c:set var="theme" value="<%= theme %>" />
+<%-- <c:set var="theme" value="<%= theme %>" /> --%>
 <c:if test="${!empty theme}">
 <script language="JavaScript">
 function validate(form) {

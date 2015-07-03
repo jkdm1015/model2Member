@@ -1,15 +1,14 @@
 <%@ page contentType = "text/html; charset=euc-kr" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import = "madvirus.gallery.Theme" %>
-<%@ page import = "madvirus.gallery.ThemeManager" %>
-<%@ page import = "madvirus.gallery.ThemeManagerException" %>
+<%@ page import = "bean.ThemeBean" %>
+<%@ page import = "dao.ThemeDaoImpl" %>
 <%
     String parentId = request.getParameter("parentId");
     String title = "";
-    Theme theme = null;
+    ThemeBean theme = null;
     if (parentId != null) {
-        ThemeManager manager = ThemeManager.getInstance();
-        theme = manager.select(Integer.parseInt(parentId));
+    	ThemeDaoImpl manager = ThemeDaoImpl.getInstance();
+        theme = (ThemeBean)manager.getElementById(parentId);
         if (theme != null) {
             title = "re:"+theme.getTitle();
         }
@@ -69,7 +68,7 @@ function validate(form) {
     <td><textarea name="content" cols="40" rows="8"></textarea></td>
 </tr>
 <tr>
-    <td colspan="2"><input type="submit" value="등록"</td>
+    <!-- <td colspan="2"><input type="submit" value="등록"</td> -->
 </tr>
 </table>
 

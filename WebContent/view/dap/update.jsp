@@ -4,34 +4,33 @@
 <%@ page import = "java.io.File" %>
 <%@ page import = "org.apache.commons.fileupload.FileItem" %>
 
-<%@ page import = "madvirus.util.ImageUtil" %>
-<%@ page import = "madvirus.fileupload.FileUploadRequestWrapper" %>
+<%@ page import = "util.ImageUtil" %>
+<%@ page import = "util.FileUploadUtil" %>
 
-<%@ page import = "madvirus.gallery.Theme" %>
-<%@ page import = "madvirus.gallery.ThemeManager" %>
-<%@ page import = "madvirus.gallery.ThemeManagerException" %>
+<%@ page import = "bean.ThemeBean" %>
+<%@ page import = "dao.ThemeDaoImpl" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-    FileUploadRequestWrapper requestWrap = new FileUploadRequestWrapper(
+    /* FileUploadRequestWrapper requestWrap = new FileUploadRequestWrapper(
         request, -1, -1,
         "C:\\jakarta-tomcat-5.0.19\\webapps\\chap18\\temp");
     HttpServletRequest tempRequest = request;
-    request = requestWrap;
+    request = requestWrap; */
 %>
-<jsp:useBean id="theme" class="madvirus.gallery.Theme">
+<jsp:useBean id="theme" class="bean.ThemeBean">
     <jsp:setProperty name="theme" property="*" />
 </jsp:useBean>
 <%
     
-    ThemeManager manager = ThemeManager.getInstance();
-    Theme oldTheme = manager.select(theme.getId());
+	ThemeDaoImpl manager = ThemeDaoImpl.getInstance();
+    ThemeBean oldTheme = (ThemeBean)manager.getElementById(String.valueOf(theme.getId()));
     
     if (theme.getPassword() == null || 
         oldTheme.getPassword().compareTo(theme.getPassword()) == 0) {
         // 암호가 같은 경우에만 작업 처리
-        FileItem imageFileItem = requestWrap.getFileItem("imageFile");
+        /* FileItem imageFileItem = requestWrap.getFileItem("imageFile");
         String image = "";
         if (imageFileItem.getSize() > 0) {
             int idx = imageFileItem.getName().lastIndexOf("\\");
@@ -69,15 +68,15 @@
         } else {
             theme.setImage(image);
         }
-        manager.update(theme);
+        manager.update(theme); */
 %>
 <html><head><title>수정</title></head><body>
 
-<c:set var="search_cond" 
+<%-- <c:set var="search_cond" 
        value="<%= requestWrap.getParameterValues("search_cond") %>" />
 <c:set var="pageNo" value="<%= requestWrap.getParameter("page") %>" />
 <c:set var="search_key" 
-       value="<%= requestWrap.getParameter("search_key") %>" />
+       value="<%= requestWrap.getParameter("search_key") %>" /> --%>
 
 <form name="move" method="post">
 <input type="hidden" name="page" value="${pageNo}">
