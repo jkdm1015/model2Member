@@ -114,8 +114,7 @@ table{
     width:75%;
     min-height: 600px;
 }
-@CHARSET "UTF-8";
-@IMPORT url("common.css");
+
 #wrap{
     width: 99%;
     text-align: left; /* 글자정렬 왼쪽 */
